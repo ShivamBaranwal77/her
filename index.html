@@ -1,0 +1,356 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>For Her</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,500;0,600;1,500&family=Cormorant+Garamond:ital,wght@0,400;0,500;1,400&display=swap');
+
+  :root{
+    --ink: #f3e9d2;
+    --ink-dim: #cbb98f;
+    --gold: #c9a227;
+    --maroon: #3a0f14;
+    --maroon-deep: #1a0608;
+    --black: #0a0605;
+  }
+
+  *{ box-sizing: border-box; }
+
+  html,body{
+    margin:0;
+    padding:0;
+    background: var(--black);
+    color: var(--ink);
+    font-family: 'Cormorant Garamond', serif;
+    overflow-x: hidden;
+  }
+
+  /* vignette + film grain feel */
+  body::before{
+    content:"";
+    position: fixed;
+    inset:0;
+    z-index: 5;
+    pointer-events: none;
+    background:
+      radial-gradient(ellipse at center, transparent 40%, rgba(0,0,0,0.75) 100%);
+  }
+
+  .stage{
+    position: relative;
+    width: 100%;
+    height: 100vh;
+    overflow: hidden;
+    background:
+      radial-gradient(ellipse at 50% 20%, var(--maroon) 0%, var(--maroon-deep) 55%, var(--black) 100%);
+  }
+
+  /* opening title, fixed, fades out */
+  .opening{
+    position: absolute;
+    inset:0;
+    display:flex;
+    flex-direction: column;
+    align-items:center;
+    justify-content:center;
+    text-align:center;
+    z-index: 3;
+    animation: openingFade 6s ease forwards;
+  }
+
+  .opening .eyebrow{
+    font-family: 'Cormorant Garamond', serif;
+    font-style: italic;
+    font-size: clamp(1rem, 2vw, 1.3rem);
+    color: var(--ink-dim);
+    letter-spacing: 0.08em;
+    margin-bottom: 0.5rem;
+  }
+
+  .opening h1{
+    font-family: 'Playfair Display', serif;
+    font-weight: 600;
+    font-size: clamp(2.2rem, 6vw, 4.2rem);
+    margin: 0;
+    color: var(--gold);
+    text-shadow: 0 0 30px rgba(201,162,39,0.35);
+  }
+
+  @keyframes openingFade{
+    0%   { opacity: 0; }
+    12%  { opacity: 1; }
+    82%  { opacity: 1; }
+    100% { opacity: 0; visibility: hidden; }
+  }
+
+  /* the scrolling credits reel */
+  .reel{
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    padding-bottom: 20vh;
+    animation: scrollUp var(--duration, 90s) linear forwards;
+    animation-delay: 5.5s;
+  }
+
+  @keyframes scrollUp{
+    from { transform: translateY(0); }
+    to   { transform: translateY(calc(-100% - 100vh)); }
+  }
+
+  .credit-block{
+    width: min(90vw, 560px);
+    margin: 7vh 0;
+  }
+
+  .role{
+    font-family: 'Playfair Display', serif;
+    font-style: italic;
+    font-weight: 500;
+    font-size: clamp(0.95rem, 1.6vw, 1.15rem);
+    color: var(--gold);
+    letter-spacing: 0.04em;
+    margin-bottom: 0.6rem;
+  }
+
+  .line{
+    font-size: clamp(1.4rem, 3vw, 2.1rem);
+    line-height: 1.35;
+    color: var(--ink);
+    margin: 0;
+  }
+
+  .sub{
+    font-size: clamp(1rem, 1.8vw, 1.2rem);
+    color: var(--ink-dim);
+    margin-top: 0.4rem;
+  }
+
+  /* photo frame */
+  .frame{
+    width: min(78vw, 340px);
+    aspect-ratio: 4 / 5;
+    margin: 0 auto 1.4rem auto;
+    border: 1px solid rgba(201,162,39,0.5);
+    padding: 10px;
+    background: rgba(201,162,39,0.03);
+  }
+
+  .frame img{
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+    filter: sepia(8%) saturate(105%);
+  }
+
+  /* placeholder look, remove once real photos are in */
+  .frame.placeholder{
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    color: rgba(201,162,39,0.55);
+    font-family: 'Cormorant Garamond', serif;
+    font-style: italic;
+    font-size: 1rem;
+    letter-spacing: 0.03em;
+  }
+
+  /* video frame - wider aspect ratio than the photo frames */
+  .frame.video-frame{
+    width: min(90vw, 520px);
+    aspect-ratio: 16 / 9;
+  }
+
+  .frame.video-frame video{
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+  }
+
+  .divider{
+    width: 60px;
+    height: 1px;
+    background: rgba(201,162,39,0.4);
+    margin: 1.6rem 0;
+  }
+
+  .final-title{
+    font-family: 'Playfair Display', serif;
+    font-weight: 600;
+    font-size: clamp(1.8rem, 4vw, 3rem);
+    color: var(--gold);
+    margin: 1rem 0 0.4rem 0;
+  }
+
+  .final-sub{
+    font-style: italic;
+    color: var(--ink-dim);
+    font-size: clamp(1rem, 1.8vw, 1.2rem);
+  }
+
+  /* mobile tightening */
+  @media (max-width: 520px){
+    .credit-block{ margin: 5vh 0; }
+  }
+
+  /* respect reduced motion */
+  @media (prefers-reduced-motion: reduce){
+    .reel{ animation: none; position: static; top:auto; margin-top: 40vh; }
+    .opening{ animation: none; opacity: 1; position: relative; height: 40vh; }
+  }
+</style>
+</head>
+<body>
+
+<div class="stage">
+
+  <div class="opening">
+    <div class="eyebrow">a small film about</div>
+    <h1>The Girl Who<br>Wears Saree Best</h1>
+  </div>
+
+  <div class="reel" style="--duration: 150s;">
+
+    <!-- ===================== -->
+    <!-- CREDIT BLOCK TEMPLATE -->
+    <!-- Copy this whole <div class="credit-block">...</div> for each of your 16 photos -->
+    <!-- Replace src="" with your photo path, and edit the text lines -->
+    <!-- One block near the end uses a <video> tag instead of <img> -->
+    <!-- ===================== -->
+
+    <div class="credit-block">
+      <div class="role">Starring</div>
+      <div class="frame placeholder">photo 1</div>
+      <!-- once you have the image, replace the line above with: -->
+      <!-- <div class="frame"><img src="photo1.jpg" alt=""></div> -->
+      <p class="line">Write your line here.</p>
+      <p class="sub">e.g. "the reason red suits some people this well"</p>
+    </div>
+
+    <div class="credit-block">
+      <div class="role">In</div>
+      <div class="frame placeholder">photo 2</div>
+      <p class="line">Write your line here.</p>
+    </div>
+
+    <div class="credit-block">
+      <div class="role">Also Featuring</div>
+      <div class="frame placeholder">photo 3</div>
+      <p class="line">Write your line here.</p>
+    </div>
+
+    <div class="credit-block">
+      <div class="role">With</div>
+      <div class="frame placeholder">photo 4</div>
+      <p class="line">Write your line here.</p>
+    </div>
+
+    <div class="credit-block">
+      <div class="role">Costume</div>
+      <div class="frame placeholder">photo 5</div>
+      <p class="line">Six yards, worn like it's nothing.</p>
+    </div>
+
+    <div class="credit-block">
+      <div class="role">Cinematography</div>
+      <div class="frame placeholder">photo 6</div>
+      <p class="line">Write your line here.</p>
+    </div>
+
+    <div class="credit-block">
+      <div class="role">Smile</div>
+      <div class="frame placeholder">photo 7</div>
+      <p class="line">Write your line here.</p>
+    </div>
+
+    <div class="credit-block">
+      <div class="role">Grace</div>
+      <div class="frame placeholder">photo 8</div>
+      <p class="line">Write your line here.</p>
+    </div>
+
+    <div class="credit-block">
+      <div class="role">Heart</div>
+      <div class="frame placeholder">photo 9</div>
+      <p class="line">Write your line here.</p>
+    </div>
+
+    <div class="credit-block">
+      <div class="role">Sunlight</div>
+      <div class="frame placeholder">photo 10</div>
+      <p class="line">Write your line here.</p>
+    </div>
+
+    <div class="credit-block">
+      <div class="role">Colours</div>
+      <div class="frame placeholder">photo 11</div>
+      <p class="line">Write your line here.</p>
+    </div>
+
+    <div class="credit-block">
+      <div class="role">Laughter</div>
+      <div class="frame placeholder">photo 12</div>
+      <p class="line">Write your line here.</p>
+    </div>
+
+    <div class="credit-block">
+      <div class="role">Softness</div>
+      <div class="frame placeholder">photo 13</div>
+      <p class="line">Write your line here.</p>
+    </div>
+
+    <div class="credit-block">
+      <div class="role">Stillness</div>
+      <div class="frame placeholder">photo 14</div>
+      <p class="line">Write your line here.</p>
+    </div>
+
+    <div class="credit-block">
+      <div class="role">Warmth</div>
+      <div class="frame placeholder">photo 15</div>
+      <p class="line">Write your line here.</p>
+    </div>
+
+    <div class="credit-block">
+      <div class="role">Forever</div>
+      <div class="frame placeholder">photo 16</div>
+      <p class="line">Write your line here.</p>
+    </div>
+
+    <!-- ===================== -->
+    <!-- VIDEO BLOCK -->
+    <!-- Replace the placeholder below with: -->
+    <!-- <div class="frame video-frame"><video src="clip.mp4" controls playsinline></video></div> -->
+    <!-- controls = shows play/pause/volume. Remove "controls" and add "autoplay muted loop" -->
+    <!-- if you want it to play on its own without sound, since browsers block autoplay with sound. -->
+    <!-- ===================== -->
+
+    <div class="credit-block">
+      <div class="role">One More Thing</div>
+      <div class="frame video-frame placeholder">video</div>
+      <p class="line">Write your line here.</p>
+    </div>
+
+    <div class="divider"></div>
+
+    <div class="credit-block">
+      <div class="final-title">Directed by</div>
+      <p class="line">Someone who loves you.</p>
+      <div class="final-sub">The End — or maybe just the beginning.</div>
+    </div>
+
+  </div>
+
+</div>
+
+</body>
+</html>
