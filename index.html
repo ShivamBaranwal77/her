@@ -133,25 +133,25 @@
     margin-top: 0.4rem;
   }
 
-  /* photo frame */
+  /* photo frame - sizes itself to the photo, so the caption sits close to it */
   .frame{
-    width: min(92vw, 480px);
-    max-height: 82vh;
+    display: inline-block;
+    max-width: min(92vw, 480px);
+    max-height: 78vh;
     margin: 0 auto 1.4rem auto;
     border: 1px solid rgba(201,162,39,0.5);
     padding: 10px;
     background: rgba(201,162,39,0.03);
-    display: flex;
-    align-items: center;
-    justify-content: center;
+    line-height: 0;
   }
 
   .frame img{
-    width: 100%;
+    display: block;
+    width: auto;
     height: auto;
+    max-width: 100%;
     max-height: 78vh;
     object-fit: contain;
-    display: block;
     filter: sepia(8%) saturate(105%);
   }
 
