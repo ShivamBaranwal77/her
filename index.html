@@ -201,10 +201,12 @@
     display: block;
     width: auto;
     height: auto;
-    /* swapped on purpose: this becomes the final visual width after rotation */
+    /* swapped on purpose: this becomes the final visual width after rotation.
+       85vh minus 28px accounts for the frame's top+bottom padding and border. */
     max-width: calc(85vh - 28px);
-    /* and this becomes the final visual height after rotation */
-    max-height: min(94vw, 600px);
+    /* this becomes the final visual height after rotation.
+       minus 22px accounts for the frame's left+right padding and border. */
+    max-height: calc(min(94vw, 600px) - 22px);
     object-fit: contain;
     transform: rotate(-90deg);
     filter: sepia(8%) saturate(105%);
