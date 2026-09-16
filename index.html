@@ -137,7 +137,7 @@
   .frame{
     display: inline-block;
     max-width: min(94vw, 600px);
-    max-height: calc(85vh + 15px);
+    max-height: 85vh;
     margin: 0 auto 1.4rem auto;
     border: 1px solid rgba(201,162,39,0.5);
     padding: 10px;
@@ -145,12 +145,14 @@
     line-height: 0;
   }
 
+  /* the image's max-height is smaller than the frame's by the padding + border
+     (10px padding + 1px border, top and bottom = 22px) so it can never poke out */
   .frame img{
     display: block;
     width: auto;
     height: auto;
     max-width: 100%;
-    max-height: calc(85vh + 15px);
+    max-height: calc(85vh - 22px);
     object-fit: contain;
     filter: sepia(8%) saturate(105%);
   }
@@ -171,7 +173,7 @@
   /* just like the photo frames. No forced aspect ratio, so nothing gets cropped. */
   .frame.video-frame{
     max-width: min(94vw, 600px);
-    max-height: calc(85vh + 15px);
+    max-height: 85vh;
   }
 
   .frame.video-frame video{
@@ -179,7 +181,7 @@
     width: auto;
     height: auto;
     max-width: 100%;
-    max-height: calc(85vh + 15px);
+    max-height: calc(85vh - 22px);
     object-fit: contain;
   }
 
@@ -343,7 +345,7 @@
     <!-- (browsers block autoplay with sound, so autoplay video must be muted). -->
     <!-- ===================== -->
 
-    <div class="credit-block">
+    <div class="credit-block" style="margin: 14vh 0;">
       <div class="role">One More Thing</div>
       <div class="frame video-frame"><video id="mainVideo" src="Video.mp4" controls playsinline></video></div>
       <p class="line">Write your line here.</p>
@@ -362,31 +364,21 @@
 </div>
 
 <script>
-  // Pause the scroll while the video plays, resume once it finishes.
+  // Pause the scroll whenever the video is actually playing, resume when it's paused/ended.
+  // This is simpler and more reliable than trying to auto-trigger playback on scroll:
+  // she taps play on the video herself, and the credits simply wait for her.
   (function(){
     var video = document.getElementById('mainVideo');
     var reel = document.querySelector('.reel');
     if(!video || !reel) return;
 
-    var hasTriggered = false;
+    video.addEventListener('play', function(){
+      reel.style.animationPlayState = 'paused';
+    });
 
-    var observer = new IntersectionObserver(function(entries){
-      entries.forEach(function(entry){
-        if(entry.isIntersecting && entry.intersectionRatio > 0.9 && !hasTriggered){
-          hasTriggered = true;
-          reel.style.animationPlayState = 'paused';
-          // muted so autoplay is allowed by the browser; she can unmute via the controls bar
-          video.muted = true;
-          video.currentTime = 0;
-          video.play().catch(function(){
-            // if autoplay is blocked for any reason, don't leave the page stuck paused forever
-            setTimeout(function(){ reel.style.animationPlayState = 'running'; }, 8000);
-          });
-        }
-      });
-    }, { threshold: [0.9] });
-
-    observer.observe(video);
+    video.addEventListener('pause', function(){
+      reel.style.animationPlayState = 'running';
+    });
 
     video.addEventListener('ended', function(){
       reel.style.animationPlayState = 'running';
