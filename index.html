@@ -136,8 +136,8 @@
   /* photo frame - sizes itself to the photo, so the caption sits close to it */
   .frame{
     display: inline-block;
-    max-width: min(92vw, 480px);
-    max-height: 78vh;
+    max-width: min(94vw, 600px);
+    max-height: 85vh;
     margin: 0 auto 1.4rem auto;
     border: 1px solid rgba(201,162,39,0.5);
     padding: 10px;
@@ -150,7 +150,7 @@
     width: auto;
     height: auto;
     max-width: 100%;
-    max-height: 78vh;
+    max-height: 85vh;
     object-fit: contain;
     filter: sepia(8%) saturate(105%);
   }
@@ -167,17 +167,20 @@
     letter-spacing: 0.03em;
   }
 
-  /* video frame - wider aspect ratio than the photo frames */
+  /* video frame - shrinks to fit the actual video, whatever its orientation, */
+  /* just like the photo frames. No forced aspect ratio, so nothing gets cropped. */
   .frame.video-frame{
-    width: min(90vw, 520px);
-    aspect-ratio: 16 / 9;
+    max-width: min(94vw, 600px);
+    max-height: 85vh;
   }
 
   .frame.video-frame video{
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
     display: block;
+    width: auto;
+    height: auto;
+    max-width: 100%;
+    max-height: 85vh;
+    object-fit: contain;
   }
 
   .divider{
@@ -342,7 +345,7 @@
 
     <div class="credit-block">
       <div class="role">One More Thing</div>
-      <div class="frame video-frame"><video src="Video.mp4" controls playsinline></video></div>
+      <div class="frame video-frame"><video id="mainVideo" src="Video.mp4" controls playsinline></video></div>
       <p class="line">Write your line here.</p>
     </div>
 
@@ -357,6 +360,39 @@
   </div>
 
 </div>
+
+<script>
+  // Pause the scroll while the video plays, resume once it finishes.
+  (function(){
+    var video = document.getElementById('mainVideo');
+    var reel = document.querySelector('.reel');
+    if(!video || !reel) return;
+
+    var hasTriggered = false;
+
+    var observer = new IntersectionObserver(function(entries){
+      entries.forEach(function(entry){
+        if(entry.isIntersecting && entry.intersectionRatio > 0.6 && !hasTriggered){
+          hasTriggered = true;
+          reel.style.animationPlayState = 'paused';
+          // muted so autoplay is allowed by the browser; she can unmute via the controls bar
+          video.muted = true;
+          video.currentTime = 0;
+          video.play().catch(function(){
+            // if autoplay is blocked for any reason, don't leave the page stuck paused forever
+            setTimeout(function(){ reel.style.animationPlayState = 'running'; }, 8000);
+          });
+        }
+      });
+    }, { threshold: [0.6] });
+
+    observer.observe(video);
+
+    video.addEventListener('ended', function(){
+      reel.style.animationPlayState = 'running';
+    });
+  })();
+</script>
 
 </body>
 </html>
