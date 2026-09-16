@@ -324,11 +324,10 @@
       <p class="line">Write your line here.</p>
     </div>
 
-    <!-- Photo16 is a close-up eye shot, landscape-ish, so it gets object-fit: contain -->
-    <!-- inline below so it doesn't get cropped oddly by the tall 4:5 frame -->
+    <!-- Photo16 is a close-up eye shot, rotated left to sit the right way up -->
     <div class="credit-block">
       <div class="role">Eyes</div>
-      <div class="frame"><img src="Photo16.jpeg" alt="" style="object-fit: contain;"></div>
+      <div class="frame"><img src="Photo16.jpeg" alt="" style="object-fit: contain; transform: rotate(-90deg);"></div>
       <p class="line">Write your line here.</p>
     </div>
 
@@ -383,14 +382,15 @@
     });
   })();
 
-  // Tap anywhere on the screen to pause or resume the whole scroll.
-  // Clicks on the video itself are left alone so its own play/pause controls still work normally.
+  // Tap (touch) or click (mouse) anywhere on the screen to pause or resume the whole scroll.
+  // "pointerup" fires for both touch taps and mouse clicks, so this works the same on phone or desktop.
+  // Clicks/taps on the video itself are left alone so its own play/pause controls still work normally.
   (function(){
     var reel = document.querySelector('.reel');
     var video = document.getElementById('mainVideo');
     if(!reel) return;
 
-    document.addEventListener('click', function(e){
+    document.addEventListener('pointerup', function(e){
       if(video && (e.target === video || video.contains(e.target))) return;
 
       var isPaused = getComputedStyle(reel).animationPlayState === 'paused';
