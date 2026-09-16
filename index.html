@@ -185,6 +185,31 @@
     object-fit: contain;
   }
 
+  /* rotated photo frame - for a photo turned 90deg, the frame needs a fixed size
+     (same envelope as a normal frame), and the image's own width/height limits
+     get swapped, since rotating a box 90deg swaps its visual width and height. */
+  .frame.rotate-left{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: min(94vw, 600px);
+    height: 85vh;
+    overflow: hidden;
+  }
+
+  .frame.rotate-left img{
+    display: block;
+    width: auto;
+    height: auto;
+    /* swapped on purpose: this becomes the final visual width after rotation */
+    max-width: calc(85vh - 28px);
+    /* and this becomes the final visual height after rotation */
+    max-height: min(94vw, 600px);
+    object-fit: contain;
+    transform: rotate(-90deg);
+    filter: sepia(8%) saturate(105%);
+  }
+
   .divider{
     width: 60px;
     height: 1px;
@@ -282,10 +307,11 @@
       <p class="line">Write your line here.</p>
     </div>
 
-    <!-- Photo16 is a close-up eye shot, rotated left to sit the right way up -->
+    <!-- Photo16 is a close-up eye shot, rotated left to sit the right way up. -->
+    <!-- The "rotate-left" frame class handles fitting the rotated photo properly. -->
     <div class="credit-block">
       <div class="role">Eyes</div>
-      <div class="frame"><img src="Photo16.jpeg" alt="" style="object-fit: contain; transform: rotate(-90deg);"></div>
+      <div class="frame rotate-left"><img src="Photo16.jpeg" alt=""></div>
       <p class="line">Write your line here.</p>
     </div>
 
