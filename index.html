@@ -218,125 +218,127 @@
     <h1>The Girl Who<br>Wears Saree Best</h1>
   </div>
 
-  <div class="reel" style="--duration: 150s;">
+  <div class="reel" style="--duration: 160s;">
 
     <!-- ===================== -->
-    <!-- CREDIT BLOCK TEMPLATE -->
-    <!-- Copy this whole <div class="credit-block">...</div> for each of your 16 photos -->
-    <!-- Replace src="" with your photo path, and edit the text lines -->
-    <!-- One block near the end uses a <video> tag instead of <img> -->
+    <!-- These blocks now point to your actual uploaded filenames. -->
+    <!-- Just edit the text in each <p class="line"> to whatever you want it to say. -->
     <!-- ===================== -->
 
     <div class="credit-block">
       <div class="role">Starring</div>
-      <div class="frame"><img src="Photo1.jpeg" alt=""></div>      
-      <!-- once you have the image, replace the line above with: -->
-      <!-- <div class="frame"><img src="photo1.jpg" alt=""></div> -->
+      <div class="frame"><img src="Photo1.jpeg" alt=""></div>
       <p class="line">Write your line here.</p>
-      <p class="sub">e.g. "the reason red suits some people this well"</p>
     </div>
 
     <div class="credit-block">
       <div class="role">In</div>
-      <div class="frame placeholder">photo 2</div>
+      <div class="frame"><img src="Photo2.jpeg" alt=""></div>
       <p class="line">Write your line here.</p>
     </div>
 
     <div class="credit-block">
       <div class="role">Also Featuring</div>
-      <div class="frame placeholder">photo 3</div>
+      <div class="frame"><img src="Photo3.jpeg" alt=""></div>
       <p class="line">Write your line here.</p>
     </div>
 
     <div class="credit-block">
       <div class="role">With</div>
-      <div class="frame placeholder">photo 4</div>
+      <div class="frame"><img src="Photo4.jpeg" alt=""></div>
       <p class="line">Write your line here.</p>
     </div>
 
     <div class="credit-block">
       <div class="role">Costume</div>
-      <div class="frame placeholder">photo 5</div>
+      <div class="frame"><img src="Photo5.jpeg" alt=""></div>
       <p class="line">Six yards, worn like it's nothing.</p>
     </div>
 
     <div class="credit-block">
       <div class="role">Cinematography</div>
-      <div class="frame placeholder">photo 6</div>
+      <div class="frame"><img src="Photo6.jpeg" alt=""></div>
       <p class="line">Write your line here.</p>
     </div>
 
     <div class="credit-block">
       <div class="role">Smile</div>
-      <div class="frame placeholder">photo 7</div>
+      <div class="frame"><img src="Photo7.jpeg" alt=""></div>
       <p class="line">Write your line here.</p>
     </div>
 
     <div class="credit-block">
       <div class="role">Grace</div>
-      <div class="frame placeholder">photo 8</div>
+      <div class="frame"><img src="Photo8.jpeg" alt=""></div>
       <p class="line">Write your line here.</p>
     </div>
 
     <div class="credit-block">
       <div class="role">Heart</div>
-      <div class="frame placeholder">photo 9</div>
+      <div class="frame"><img src="Photo9.jpeg" alt=""></div>
       <p class="line">Write your line here.</p>
     </div>
 
     <div class="credit-block">
       <div class="role">Sunlight</div>
-      <div class="frame placeholder">photo 10</div>
+      <div class="frame"><img src="Photo10.jpeg" alt=""></div>
       <p class="line">Write your line here.</p>
     </div>
 
     <div class="credit-block">
       <div class="role">Colours</div>
-      <div class="frame placeholder">photo 11</div>
+      <div class="frame"><img src="Photo11.jpeg" alt=""></div>
       <p class="line">Write your line here.</p>
     </div>
 
     <div class="credit-block">
       <div class="role">Laughter</div>
-      <div class="frame placeholder">photo 12</div>
+      <div class="frame"><img src="Photo12.jpeg" alt=""></div>
       <p class="line">Write your line here.</p>
     </div>
 
     <div class="credit-block">
       <div class="role">Softness</div>
-      <div class="frame placeholder">photo 13</div>
+      <div class="frame"><img src="Photo13.jpeg" alt=""></div>
       <p class="line">Write your line here.</p>
     </div>
 
     <div class="credit-block">
       <div class="role">Stillness</div>
-      <div class="frame placeholder">photo 14</div>
+      <div class="frame"><img src="Photo14.jpeg" alt=""></div>
       <p class="line">Write your line here.</p>
     </div>
 
     <div class="credit-block">
       <div class="role">Warmth</div>
-      <div class="frame placeholder">photo 15</div>
+      <div class="frame"><img src="Photo15.jpeg" alt=""></div>
+      <p class="line">Write your line here.</p>
+    </div>
+
+    <!-- Photo16 is a close-up eye shot, landscape-ish, so it gets object-fit: contain -->
+    <!-- inline below so it doesn't get cropped oddly by the tall 4:5 frame -->
+    <div class="credit-block">
+      <div class="role">Eyes</div>
+      <div class="frame"><img src="Photo16.jpeg" alt="" style="object-fit: contain;"></div>
       <p class="line">Write your line here.</p>
     </div>
 
     <div class="credit-block">
       <div class="role">Forever</div>
-      <div class="frame placeholder">photo 16</div>
+      <div class="frame"><img src="Photo17.jpeg" alt=""></div>
       <p class="line">Write your line here.</p>
     </div>
 
     <!-- ===================== -->
     <!-- VIDEO BLOCK -->
-    <!-- Replace the placeholder below with: -->
-    <!-- <div class="frame video-frame"><video src="clip.mp4" controls playsinline></video></div> -->
-    <!-- controls = shows play/pause/volume. Remove "controls" and add "autoplay muted loop" -->
-    <!-- if you want it to play on its own without sound, since browsers block autoplay with sound. -->
+    <!-- "controls" shows a play/pause/volume bar so she can tap play herself. -->
+    <!-- If you'd rather it plays on its own, replace "controls" with "autoplay muted loop" -->
+    <!-- (browsers block autoplay with sound, so autoplay video must be muted). -->
     <!-- ===================== -->
 
     <div class="credit-block">
       <div class="role">One More Thing</div>
-      <div class="frame video-frame placeholder">video</div>
+      <div class="frame video-frame"><video src="Video.mp4" controls playsinline></video></div>
       <p class="line">Write your line here.</p>
     </div>
 
