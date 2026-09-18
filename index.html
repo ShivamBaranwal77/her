@@ -133,6 +133,13 @@
     margin-top: 0.4rem;
   }
 
+  /* for longer paragraph-style captions, smaller and more readable than a short one-line caption */
+  .line.long{
+    font-size: clamp(1rem, 2vw, 1.3rem);
+    line-height: 1.6;
+    color: var(--ink-dim);
+  }
+
   /* photo frame - sizes itself to the photo, so the caption sits close to it */
   .frame{
     display: inline-block;
@@ -250,11 +257,11 @@
 <div class="stage">
 
   <div class="opening">
-    <div class="eyebrow">a small film about</div>
-    <h1>The Girl Who<br>Wears Saree Best</h1>
+    <div class="eyebrow">A Feature Film</div>
+    <h1>Starring You</h1>
   </div>
 
-  <div class="reel" style="--duration: 20s;">
+  <div class="reel" style="--duration: 160s;">
 
     <!-- ===================== -->
     <!-- These blocks now point to your actual uploaded filenames. -->
@@ -264,14 +271,13 @@
     <div class="credit-block">
       <div class="role">Starring</div>
       <div class="frame"><img src="Photo8.jpeg" alt=""></div>
-      <p class="line">They say every great film needs a lead star, but honestly, no screen could ever really do you justice. So, i created a film with only one character, my favorite one, you. So now let's get a quick look at all the little expressions, styles, and moments that make you my absolute favorite person.
-</p>
+      <p class="line long">They say every great film needs a lead star, but honestly, no screen could ever really do you justice. So, I created a film with only one character, my favorite one, you. So now let's get a quick look at all the little expressions, styles, and moments that make you my absolute favorite person.</p>
     </div>
 
     <div class="credit-block">
       <div class="role">In</div>
       <div class="frame"><img src="Photo9.jpeg" alt=""></div>
-      <p class="line">Write your line here.</p>
+      <p class="line long">Every great story needs an iconic setting, but not when it's you, that purple saree with those brown eyes sitting casually on that staircase like it's a normal thing but there lies my heart, you somehow turn an ordinary hallway into an entire cinematic scene.</p>
     </div>
 
     <div class="credit-block">
